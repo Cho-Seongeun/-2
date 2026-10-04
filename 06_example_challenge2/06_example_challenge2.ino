@@ -51,6 +51,7 @@ void setup()
   pinMode(LED_PIN, OUTPUT);
 
   set_period(100);      // 1 ms
+  // 100 -> 1000, 10000으로 바꾸어 각각 확인하면 된다!
 
 }
 
