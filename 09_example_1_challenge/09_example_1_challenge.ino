@@ -14,8 +14,8 @@
 
 #define _EMA_ALPHA 0.5
 
-// Change N to 3, 10, or 30
 #define N 3
+// 여기서 N을 3, 10, 30로 각각 변화시키면 된다.
 
 unsigned long last_sampling_time = 0;
 
