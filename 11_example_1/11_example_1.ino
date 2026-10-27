@@ -1,20 +1,20 @@
 #include <Servo.h>
 
 
-#define PIN_LED   9   // LED active-low
-#define PIN_TRIG  12  // sonar sensor TRIGGER
-#define PIN_ECHO  13  // sonar sensor ECHO
-#define PIN_SERVO 10  // servo motor
+#define PIN_LED   9  
+#define PIN_TRIG  12 
+#define PIN_ECHO  13 
+#define PIN_SERVO 10  
 
 
 #define SND_VEL 346.0
-#define INTERVAL 25       // sampling interval (ms), same as example
-#define PULSE_DURATION 10 // trigger pulse duration (us)
-#define _DIST_MIN 180.0   // mm
-#define _DIST_MAX 360.0   // mm
+#define INTERVAL 25      
+#define PULSE_DURATION 10 
+#define _DIST_MIN 180.0   
+#define _DIST_MAX 360.0   
 #define TIMEOUT ((INTERVAL / 2) * 1000.0)
 #define SCALE (0.001 * 0.5 * SND_VEL)
-#define _EMA_ALPHA 0.3    // starting value; tune on the actual device
+#define _EMA_ALPHA 0.3  
 
 #define _DUTY_MIN 900
 #define _DUTY_MAX 2550
@@ -28,7 +28,7 @@ Servo myservo;
 float USS_measure(int TRIG, int ECHO);
 
 void setup() {
-  digitalWrite(PIN_LED, HIGH); // active-low: initially OFF
+  digitalWrite(PIN_LED, HIGH); 
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_TRIG, OUTPUT);
   pinMode(PIN_ECHO, INPUT);
@@ -57,7 +57,7 @@ void loop() {
   digitalWrite(PIN_LED, in_range ? LOW : HIGH);
 
   if (!valid) {
-    dist_filtered = dist_prev; // timeout: keep previous filtered distance
+    dist_filtered = dist_prev;
   } else {
     if (dist_raw < _DIST_MIN) {
       dist_filtered = _DIST_MIN;
