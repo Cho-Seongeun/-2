@@ -1,0 +1,43 @@
+#include <Servo.h>
+
+#define PIN_SERVO 10
+
+#define _DUTY_MIN 900
+#define _DUTY_NEU 1500
+#define _DUTY_MAX 2450
+
+#define _SERVO_SPEED 3.0
+#define INTERVAL 20
+
+Servo myservo;
+unsigned long start_time;
+unsigned long last_sampling_time;
+float duty_curr;
+
+void setup() {
+  myservo.attach(PIN_SERVO);
+  Serial.begin(57600);
+
+  duty_curr = _DUTY_MIN;
+  myservo.writeMicroseconds((int)duty_curr);
+  start_time = millis();
+  last_sampling_time = start_time;
+}
+
+void loop() {
+  unsigned long time_curr = millis();
+
+  if (time_curr - last_sampling_time < INTERVAL)
+    return;
+  last_sampling_time += INTERVAL;
+
+  unsigned long elapsed = time_curr - start_time;
+  if (elapsed >= 60000UL) {
+    duty_curr = _DUTY_MAX;
+  } else {
+    duty_curr = _DUTY_MIN + (_DUTY_MAX - _DUTY_MIN)
+                * (_SERVO_SPEED / 180.0) * (elapsed / 1000.0);
+  }
+
+  myservo.writeMicroseconds((int)duty_curr);
+}
