@@ -15,11 +15,10 @@ unsigned long last_sampling_time;
 float duty_curr;
 
 void setup() {
+  duty_curr = _DUTY_MIN;
+  myservo.writeMicroseconds((int)duty_curr);
   myservo.attach(PIN_SERVO);
   Serial.begin(57600);
-
-  duty_curr = _DUTY_MAX;
-  myservo.writeMicroseconds((int)duty_curr);
   delay(2000);
   start_time = millis();
   last_sampling_time = start_time;
